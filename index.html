@@ -27,7 +27,7 @@
       </div>
       <div class="block">
         <label for="ddd">DDD</label>
-        <input id="ddd" type="number" class="input" autocomplete="off" value="34">
+        <input id="ddd" type="number" class="input" autocomplete="off">
       </div>
       <div class="block">
         <label for="phone">Número do Telefone</label>
@@ -117,9 +117,6 @@
 
 <script>
   const link  = document.getElementById('link');
-  const defaultLinkText = '☝️ Digite o número';
-  link.innerText = defaultLinkText;
-
   const preview = document.getElementById('preview');
 
   const country = document.getElementById('country');
@@ -128,14 +125,28 @@
 
   const form = document.getElementById('form');
 
+  /* Set link placeholder */
+  const defaultLinkText = '☝️ Digite o número';
+  link.innerText = defaultLinkText;
+
+  /* Set DDD */
+  const storedDdd = localStorage.getItem('ddd') ?? 34;
+  ddd.value = storedDdd;
+
   form.addEventListener('submit', (e) => {
-    console.log('submit', e)
     e.preventDefault();
     link.click();
   });
 
   for (input of document.querySelectorAll('input')) {
-    input.addEventListener('keydown', (e) => {
+    input.addEventListener('keyup', (e) => {
+      if (e.target === ddd) {
+        if (e.target.value.length > 2) {
+          ddd.value = e.target.value.toString().substr(0, 2);
+          return;
+        }
+        localStorage.setItem('ddd', e.target.value);
+      }
 
       if (event.which === 13) {
         const event = new Event('submit');
@@ -143,21 +154,19 @@
         return false;
       }
 
-      setTimeout(() => {
-        const phoneNumber = `${country.value}${ddd.value}${phone.value}`;
-        const phone1 = phone.value.substr(0, 5);
-        const phone2 = phone.value.substr(5);
+      const phoneNumber = `${country.value}${ddd.value}${phone.value}`;
+      const phone1 = phone.value.substr(0, 5);
+      const phone2 = phone.value.substr(5);
 
-        const href = `https://api.whatsapp.com/send?phone=${phoneNumber}`;
-        const text = !phone.value
-          ? defaultLinkText
-          : `+${country.value} ${ddd.value} ${phone1} ${phone2}\n${href}`;
+      const href = `https://wa.me/${phoneNumber}`;
+      const text = !phone.value
+        ? defaultLinkText
+        : `+${country.value} ${ddd.value} ${phone1} ${phone2}\n${href}`;
 
-        link.innerText = text;
-        link.href = href;
+      link.innerText = text;
+      link.href = href;
 
-        const preview = `+${country.value} ${ddd.value} ${phone1} ${phone2}`;
-      });
+      const preview = `+${country.value} ${ddd.value} ${phone1} ${phone2}`;
     });
   }
 </script>
