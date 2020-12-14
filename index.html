@@ -191,9 +191,15 @@
       }
 
       /* Set HTML values */
-      const href = `https://wa.me/${phoneNumber}`;
-      const previewText = `👉 +${country.value} ${ddd.value} ${phone1} ${phone2}`;
-      const linkText = !phone.value ? defaultLinkText : href;
+      let href = '#';
+      let previewText = '';
+      let linkText = defaultLinkText;
+
+      if (phoneValue) {
+        linkText = `https://wa.me/${phoneNumber}`;
+        previewText = `👉 +${country.value} ${ddd.value} ${phone1} ${phone2}`;
+        href = `https://wa.me/${phoneNumber}`;
+      }
 
       anchor.href = href;
       link.innerText = linkText;
