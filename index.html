@@ -3,7 +3,7 @@
 <head>
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Gerador de Link de WhatsApp</title>
+  <title>Criador de Chat do WhatsApp</title>
   <link rel="icon" href="./favicon.png">
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
@@ -12,10 +12,10 @@
     <div>
       <img src="./coffee_whatsapp.png" height="90"/>
     </div>
-    <div class="title">Gerador de Link de WhatsApp</div>
+    <div class="title">Criador de Chat do WhatsApp</div>
 
     <div>
-      Você não precisa do contato de desconhecidos na sua agenda!
+      Você não precisa do contato de desconhecidos na sua agenda.
       <br>
       Digite o número e clique no link para abrir um novo chat.
       <br>
@@ -171,12 +171,21 @@
         return false;
       }
 
-      const phoneNumber = `${country.value}${ddd.value}${phone.value}`;
-      const phone1 = phone.value.substr(0, 5);
-      const phone2 = phone.value.substr(5);
+      const phoneValue = phone.value;
+      const phoneNumber = `${country.value}${ddd.value}${phoneValue}`;
+
+      let phone1 = phoneValue;
+      let phone2 = '';
+      if (phoneValue.length === 8) {
+        phone1 = phoneValue.substr(0, 4);
+        phone2 = phoneValue.substr(4);
+      } else if (phoneValue.length > 4) {
+        phone1 = phoneValue.substr(0, 5);
+        phone2 = phoneValue.substr(5);
+      }
 
       const href = `https://wa.me/${phoneNumber}`;
-      const previewText = `+${country.value} ${ddd.value} ${phone1} ${phone2}`;
+      const previewText = `👉 +${country.value} ${ddd.value} ${phone1} ${phone2}`;
       const linkText = !phone.value ? defaultLinkText : href;
 
       anchor.href = href;
