@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>WhatsApp Link Generator</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+  <div id="container">
+    <div class="title">WhatsApp Link Generator</div>
+
+    <form id="form" action="#">
+      <div class="block">
+        <label for="country">Country Code</label>
+        <input id="country" type="number" class="input" autocomplete="off" value="55">
+      </div>
+      <div class="block">
+        <label for="ddd">DDD</label>
+        <input id="ddd" type="number" class="input" autocomplete="off" value="34">
+      </div>
+      <div class="block">
+        <label for="phone">Phone Number</label>
+        <input id="phone" type="number" autocomplete="off" class="input">
+      </div>
+    </form>
+
+    <span id="preview"></span>
+    <a id="link" href="#">type phone number</a>
+  </div>
+</body>
+
+<style>
+  html {
+    font-size: 15px;
+  }
+
+  #container {
+    height: 90vh;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .title {
+    color: cadetblue;
+    font-variant: small-caps;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .block {
+    margin-top: 0.9rem;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    font-size: 1rem;
+    color: #656565;
+    font-variant: all-petite-caps;
+  }
+
+  a {
+    margin-top: 2rem;
+    color: cadetblue;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-variant: small-caps;
+  }
+
+  input {
+    text-align: center;
+    line-height: 2rem;
+    margin-top: 0.3rem;
+    border-radius: 5px;
+    border: solid 1px cadetblue;
+    font-size: 1.2rem;
+  }
+
+  /* HIDE ARROWS IN INPUT NUMBER */
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+</style>
+
+<script>
+  const link  = document.getElementById('link');
+  const preview = document.getElementById('preview');
+
+  const country = document.getElementById('country');
+  const ddd = document.getElementById('ddd');
+  const phone = document.getElementById('phone');
+
+  const form = document.getElementById('form');
+
+  form.addEventListener('submit', (e) => {
+    console.log('submit', e)
+    e.preventDefault();
+    link.click();
+  });
+
+  for (input of document.querySelectorAll('input')) {
+    input.addEventListener('keydown', (e) => {
+
+      if (event.which === 13) {
+        const event = new Event('submit');
+        form.dispatchEvent(event);
+        return false;
+      }
+
+      setTimeout(() => {
+        const phoneNumber = `${country.value}${ddd.value}${phone.value}`;
+        const phone1 = phone.value.substr(0, 5);
+        const phone2 = phone.value.substr(5);
+
+        const href = `https://api.whatsapp.com/send?phone=${phoneNumber}`;
+        const text = !phone.value
+          ? 'type phone number'
+          : `+${country.value} ${ddd.value} ${phone1} ${phone2}\n${href}`;
+
+        link.innerText = text;
+        link.href = href;
+
+        const preview = `+${country.value} ${ddd.value} ${phone1} ${phone2}`;
+      });
+    });
+  }
+
+
+</script>
+</html>
