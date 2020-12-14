@@ -35,7 +35,7 @@
       </div>
       <div class="block">
         <label for="phone">Número do Telefone</label>
-        <input id="phone" type="number" autocomplete="off" class="input" value="910238">
+        <input id="phone" type="number" autocomplete="off" class="input">
       </div>
     </form>
 
@@ -157,33 +157,40 @@
 
   for (input of document.querySelectorAll('input')) {
     input.addEventListener('keyup', (e) => {
+      /* DDD */
       if (e.target === ddd) {
+        /* Validate DDD */
         if (e.target.value.length > 2) {
           ddd.value = e.target.value.toString().substr(0, 2);
           return;
         }
+        /* Store DDD in localStorage */
         localStorage.setItem('ddd', e.target.value);
       }
 
+      /* Submit on ENTER */
       if (event.which === 13) {
         const event = new Event('submit');
         form.dispatchEvent(event);
         return false;
       }
 
+      /* Build phone number */
       const phoneValue = phone.value;
       const phoneNumber = `${country.value}${ddd.value}${phoneValue}`;
 
+      /* Build Preview */
       let phone1 = phoneValue;
       let phone2 = '';
-      if (phoneValue.length === 8) {
+      if (phoneValue.length <= 8) {
         phone1 = phoneValue.substr(0, 4);
         phone2 = phoneValue.substr(4);
-      } else if (phoneValue.length > 4) {
+      } else {
         phone1 = phoneValue.substr(0, 5);
         phone2 = phoneValue.substr(5);
       }
 
+      /* Set HTML values */
       const href = `https://wa.me/${phoneNumber}`;
       const previewText = `👉 +${country.value} ${ddd.value} ${phone1} ${phone2}`;
       const linkText = !phone.value ? defaultLinkText : href;
