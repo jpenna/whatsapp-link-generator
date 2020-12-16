@@ -226,7 +226,7 @@
       let previewText = defaultLinkText;
 
       if (phoneValue) {
-        previewText = `+${country.value} ${ddd.value} ${phone1} ${phone2}`;
+        previewText = `(${ddd.value}) ${phone1} ${phone2}`;
         href = `https://wa.me/${phoneNumber}`;
         anchor.className = 'link-button';
         preview.className = 'preview';
