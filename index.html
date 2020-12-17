@@ -81,8 +81,9 @@
     anchor.click();
   });
 
-  for (input of document.querySelectorAll('input')) {
-    input.addEventListener('keyup', (e) => {
+  const updateField = (e) => {
+    // Wait for component to update
+    setTimeout(() => {
       /* DDD */
       if (e.target === ddd) {
         /* Validate DDD */
@@ -95,7 +96,7 @@
       }
 
       /* Submit on ENTER */
-      if (event.which === 13) {
+      if (e.which === 13) {
         const event = new Event('submit');
         form.dispatchEvent(event);
         return false;
@@ -133,6 +134,26 @@
       anchor.href = href;
       preview.innerText = previewText;
     });
+  };
+
+  const onPaste = (e) => {
+    console.log('paste')
+    const pasted = (event.clipboardData || window.clipboardData).getData('text');
+    const cleaned = `${pasted}`.replaceAll(/[^0-9]/g, '');
+
+    if (pasted !== cleaned) {
+      if (cleaned) {
+        e.target.value = cleaned;
+      }
+      e.preventDefault();
+    }
+
+    updateField(e);
+  }
+
+  for (input of document.querySelectorAll('input')) {
+    input.addEventListener('keydown', updateField);
+    input.addEventListener('paste', onPaste);
   }
 </script>
 
@@ -156,10 +177,9 @@
 <script>
   let deferredPrompt;
 
-  if (!navigator.onLine) {
-    console.log('offline')
+  window.addEventListener('offline',  () => {
     location.href = 'offline.html';
-  }
+  });
 
   if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js');
