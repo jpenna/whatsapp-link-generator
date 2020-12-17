@@ -1,12 +1,12 @@
 {
-  "name": "Criar Contato WhatsApp",
-  "short_name": "Contato WhatsApp",
-  "start_url": ".",
-  "scope": ".",
-  "display": "standalone",
-  "background_color": "#199683",
-  "theme_color": "#199683",
+  "name": "Criar Chat WhatsApp",
+  "short_name": "+ Chat WhatsApp",
   "description": "Criador de chat do WhatsApp sem adicionar contato",
+  "start_url": ".",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#199683",
+  "background_color": "#199683",
   "icons": [
     {
       "src": "images/app_logos/android/android-launchericon-512-512.png",

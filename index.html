@@ -3,12 +3,17 @@
 <head>
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Criador de Chat do WhatsApp</title>
+  <title>Criar Chat do WhatsApp</title>
   <link rel="icon" href="./images/favicon.png">
   <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
+  <button id="installButton" type="button" class="install-button">
+    ⭐️ Instalar
+  </button>
+
   <a class="github" href="https://github.com/jpenna/whatsapp-link-generator">
     <img src="./images/github.png" alt="github" height="29px" />
   </a>
@@ -17,7 +22,7 @@
     <div>
       <img src="./images/coffee_whatsapp.png" height="90"/>
     </div>
-    <div class="title">Criador de Chat do WhatsApp</div>
+    <div class="title">Criar Chat do WhatsApp</div>
 
     <div>
       Você não precisa do contato de desconhecidos na sua agenda.
@@ -30,7 +35,7 @@
     </div>
 
     <form id="form" action="#">
-      <div class="block hidden">
+      <div class="block" style="display: none;">
         <label for="country">Código do País</label>
         <input id="country" type="number" class="input" autocomplete="off" value="55">
       </div>
@@ -52,117 +57,6 @@
 
   </div>
 </body>
-
-<style>
-  .hidden {
-    display: none;
-  }
-
-  html {
-    font-size: 15px;
-  }
-
-  #container {
-    height: 90vh;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    font-size: 1.2rem;
-    padding: 15px;
-  }
-
-  .hidden {
-    visibility: hidden;
-  }
-
-  .title {
-    color: #199683;
-    font-variant: small-caps;
-    font-size: 1.8rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .block {
-    margin-top: 0.9rem;
-    text-align: center;
-  }
-
-  label {
-    display: block;
-    font-size: 1rem;
-    color: #656565;
-    font-variant: all-petite-caps;
-  }
-
-  #preview {
-    margin: 1.2rem auto 0.8rem auto;
-  }
-
-  .add-number {
-    display: block;
-    color: #199683;
-    font-size: 1.5rem;
-    font-variant: small-caps;
-  }
-
-  .preview {
-    color: #199683;
-    font-size: 1.7rem;
-  }
-
-  .link-button {
-    background: #1ebea5;
-    color: white;
-    max-width: 240px;
-    font-size: 1.8rem;
-    padding: 0 2rem;
-    line-height: 3.2rem;
-    border-radius: 7px;
-    margin: 0 auto;
-    font-variant: all-small-caps;
-    text-decoration: none;
-    display: block;
-  }
-
-  input {
-    text-align: center;
-    line-height: 2.4rem;
-    margin-top: 0.3rem;
-    border-radius: 5px;
-    border: solid 1px #199683;
-    font-size: 1.2rem;
-  }
-
-  .disclaimer {
-    font-size: 1rem;
-    color: grey;
-    margin-top: 0.7rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .github {
-    position: absolute;
-    right: 10px;
-    opacity: 0.85;
-    width: 50px;
-    height: 40px;
-    text-align: end;
-  }
-
-  /* HIDE ARROWS IN INPUT NUMBER */
-  /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  /* Firefox */
-  input[type=number] {
-    -moz-appearance: textfield;
-  }
-</style>
 
 <script>
   const anchor  = document.getElementById('anchor');
@@ -256,6 +150,36 @@
     gtag('js', new Date());
     gtag('config', 'G-TXJHVM4WMH');
   })();
+</script>
+
+<!-- PWA -->
+<script>
+  let deferredPrompt;
+
+  if (!navigator.onLine) {
+    console.log('offline')
+    location.href = 'offline.html';
+  }
+
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  };
+
+  function showInstallButton() {
+    const installButton = document.getElementById('installButton');
+    installButton.setAttribute('style', 'display: initial');
+
+    installButton.addEventListener('click', (e) => {
+      installButton.setAttribute('style', 'display: none');
+      deferredPrompt.prompt();
+    });
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    showInstallButton();
+  });
 </script>
 
 </html>

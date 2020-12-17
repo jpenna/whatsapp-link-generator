@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Criador de Chat do WhatsApp</title>
+  <link rel="icon" href="./images/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+  <div id="container">
+    <div class="icon">📵</div>
+    <div class="title">Você está <span class="offline">OFFLINE</span></div>
+    <div class="subtitle">Só é possível adicionar um contato se estiver <span class="online">ONLINE</span>.</div>
+    <div class="subtitle">Tente novamente quanto estiver conectado.</div>
+    <button type="button" id="reloadButton">👉 Recarregar</button>
+  </div>
+</body>
+
+<script>
+  document.getElementById('reloadButton').addEventListener('click', () => {
+    window.location.href = '/';
+  });
+
+  window.addEventListener('online',  () => {
+    window.location.href = '/';
+  });
+</script>
+
+<style>
+.icon {
+  font-size: 5rem;
+}
+
+.title {
+  color: initial;
+}
+
+.subtitle {
+  margin-bottom: 1rem;
+  color: grey;
+}
+
+.offline {
+  color: red;
+}
+
+.online {
+  color: #199683;
+}
+
+#reloadButton {
+  margin-top: 1rem;
+}
+</style>
