@@ -120,8 +120,13 @@ input {
 
 .contato {
   font-size: 3.5rem;
-  margin-right: 20px;
+  margin-right: 25px;
   line-height: 32px;
+}
+
+#share {
+  margin-right: 15px;
+  background: none;
 }
 
 /* HIDE ARROWS IN INPUT NUMBER */
