@@ -12,14 +12,21 @@ button {
   font-size: 1.4rem;
 }
 
+a {
+  font-variant: all-small-caps;
+  text-decoration: none;
+}
+
 #container {
-  height: 90vh;
+  position: absolute;
+  height: 100%;
   justify-content: center;
   display: flex;
   flex-direction: column;
   text-align: center;
   font-size: 1.2rem;
-  padding: 25px 15px 15px;
+  padding: 15px 15px 15px;
+  box-sizing: border-box;
 }
 
 .hidden {
@@ -70,8 +77,6 @@ label {
   line-height: 3.2rem;
   border-radius: 7px;
   margin: 0 auto;
-  font-variant: all-small-caps;
-  text-decoration: none;
   display: block;
 }
 
@@ -91,20 +96,31 @@ input {
   margin-bottom: 0.3rem;
 }
 
-.github {
-  position: absolute;
-  right: 10px;
-  opacity: 0.85;
-  width: 50px;
-  height: 40px;
-  text-align: end;
-}
-
-.install-button {
+#installButton {
+  display: none;
   position: absolute;
   top: 13px;
   left: 15px;
-  display: none;
+  z-index: 10;
+  line-height: 1.4rem;
+}
+
+.external-bar {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  z-index: 10;
+  align-content: center;
+}
+
+.github {
+  opacity: 0.85;
+}
+
+.contato {
+  font-size: 3.5rem;
+  margin-right: 20px;
+  line-height: 32px;
 }
 
 /* HIDE ARROWS IN INPUT NUMBER */
