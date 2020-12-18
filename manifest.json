@@ -3,7 +3,7 @@
   "short_name": "+ Chat WhatsApp",
   "description": "Criador de chat do WhatsApp sem adicionar contato",
   "start_url": ".",
-  "scope": "/",
+  "scope": ".",
   "display": "standalone",
   "theme_color": "#199683",
   "background_color": "#199683",

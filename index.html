@@ -195,7 +195,15 @@
   });
 
   if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => {
+        reg.update()
+        reg.addEventListener('updatefound', () => {
+          alert("Nova versão disponível! Por favor, feche a página ou aplicação e entre novamente.");
+        });
+      }).catch((err) =>
+        console.log('ServiceWorker registration failed: ', err)
+      );
   };
 
   function showInstallButton() {
