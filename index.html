@@ -224,23 +224,18 @@
 
     if (navigator.share) {
       navigator.share({
-          title: document.title,
-          url,
-        }).then(() => {
-          console.log('Thanks for sharing!');
-        })
-        .catch((err) => {
-          console.error(err);
-          copyText(text);
-        });
+        title: document.title,
+        url,
+      }).catch((err) => {
+        console.error(err);
+        copyText(text);
+      });
     } else {
       result = await copyText(text);
     }
 
     if (result) {
       alert('O link da página foi copiado!');
-    } else {
-      alert('Houve um erro ao copiar o link.');
     }
   });
 </script>
