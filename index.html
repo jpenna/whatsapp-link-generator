@@ -274,7 +274,9 @@
       .then((reg) => {
         reg.update()
         reg.addEventListener('updatefound', () => {
-          alert("Nova versão disponível! Por favor, feche a página ou aplicação e entre novamente.");
+          /* self.skipWaiting() is ON, so reload to make sure everything works */
+          alert("Nova versão disponível, vamos atualizar!");
+          location.reload();
         });
       }).catch((err) =>
         console.log('ServiceWorker registration failed: ', err)

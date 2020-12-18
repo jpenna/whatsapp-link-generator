@@ -1,4 +1,4 @@
-const cacheName = 'zap2';
+const cacheName = 'zap3';
 
 const cacheFiles = [
   'offline.html',
@@ -9,7 +9,7 @@ const cacheFiles = [
 
 self.addEventListener('install', (event) => {
   console.log('[Service Worker] Install');
-  // self.skipWaiting();
+  self.skipWaiting();
   event.waitUntil(
     caches.open(cacheName).then((cache) => {
       return cache.addAll(cacheFiles);
