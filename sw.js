@@ -1,4 +1,4 @@
-const cacheName = 'zap3';
+const cacheName = 'zap4';
 
 const cacheFiles = [
   'offline.html',
@@ -34,6 +34,11 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Not sure if this is needed...
+  if (event.request.method !== 'GET') {
+    return fetch(event.request);
+  }
+
   event.respondWith(
     caches.match(event.request)
     .then((found) =>

@@ -276,7 +276,7 @@
         reg.addEventListener('updatefound', () => {
           /* self.skipWaiting() is ON, so reload to make sure everything works */
           alert("Nova versão disponível, vamos atualizar!");
-          location.reload();
+          location.reload(true); // Force reload to refresh browser's cache
         });
       }).catch((err) =>
         console.log('ServiceWorker registration failed: ', err)
