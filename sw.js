@@ -22,7 +22,17 @@ self.addEventListener('fetch', (event) => {
       if (!response && !navigator.onLine) {
         return caches.match('offline.html');
       }
-      return response || fetch(event.request)
+
+      if (response && navigator.onLine) {
+        return caches.open(cacheName).then((cache) =>
+          fetch(event.request).then((updated) => {
+            cache.put(event.request, updated.clone())
+            return updated
+          })
+        )
+      }
+
+      return fetch(event.request)
     }).catch(console.err)
   );
 });
