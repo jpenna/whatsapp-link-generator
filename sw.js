@@ -1,4 +1,4 @@
-const cacheName = 'zap4';
+const cacheName = 'zap5';
 
 const cacheFiles = [
   'offline.html',

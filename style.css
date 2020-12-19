@@ -12,9 +12,19 @@ button {
   font-size: 1.4rem;
 }
 
+button:focus {
+  outline: none;
+  opacity: 80%;
+}
+
 a {
   font-variant: all-small-caps;
   text-decoration: none;
+}
+
+a:focus {
+  outline: none;
+  opacity: 80%;
 }
 
 #container {
@@ -103,7 +113,7 @@ input {
   top: 13px;
   left: 15px;
   z-index: 10;
-  line-height: 1.4rem;
+  line-height: 2rem;
 }
 
 .external-bar {
@@ -112,16 +122,18 @@ input {
   display: flex;
   z-index: 10;
   align-content: center;
+  opacity: 80%;
 }
 
-.github {
-  opacity: 0.85;
+#github {
+  padding: 4px;
 }
 
-.contato {
+#contato {
   font-size: 3.5rem;
   margin-right: 25px;
   line-height: 32px;
+  padding: 3px;
 }
 
 #share {
